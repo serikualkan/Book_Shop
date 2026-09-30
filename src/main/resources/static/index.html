@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookly — Modern Book Store</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container header-content">
+
+        <a href="/" class="logo">
+            <span class="logo-icon">B</span>
+            <span>Bookly</span>
+        </a>
+
+        <nav class="navigation">
+            <a href="#books">Books</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-button" onclick="focusSearch()" title="Search">
+                🔍
+            </button>
+
+            <button class="cart-button" onclick="openCart()">
+                🛒
+                <span>Cart</span>
+                <b id="cartCount">0</b>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="container hero-content">
+
+            <div class="hero-text">
+                <span class="badge">📚 Discover your next story</span>
+
+                <h1>
+                    Books that make
+                    <span>you think.</span>
+                </h1>
+
+                <p>
+                    Explore our collection of programming, fiction,
+                    business and many other books.
+                </p>
+
+                <a href="#books" class="primary-button">
+                    Explore books →
+                </a>
+            </div>
+
+            <div class="hero-card">
+                <div class="floating-book book-one">
+                    <div class="book-cover programming">CODE</div>
+                    <strong>Clean Code</strong>
+                    <small>Robert C. Martin</small>
+                </div>
+
+                <div class="floating-book book-two">
+                    <div class="book-cover fiction">1984</div>
+                    <strong>1984</strong>
+                    <small>George Orwell</small>
+                </div>
+
+                <div class="hero-circle"></div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="search-section">
+        <div class="container">
+
+            <div class="search-box">
+                <span>🔍</span>
+
+                <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search by title, author or genre..."
+                        oninput="searchBooks()"
+                >
+
+                <button onclick="clearSearch()">Clear</button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="categories" id="categories">
+        <div class="container">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">BROWSE</span>
+                    <h2>Popular categories</h2>
+                </div>
+            </div>
+
+            <div class="category-list" id="categoryList">
+                <button class="category active" onclick="filterCategory('All', this)">
+                    All books
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- BOOKS -->
+
+    <section class="books-section" id="books">
+
+        <div class="container">
+
+            <div class="books-heading">
+
+                <div>
+                    <span class="section-label">OUR COLLECTION</span>
+                    <h2>Featured books</h2>
+                </div>
+
+                <span id="bookCounter" class="book-counter">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading books...</p>
+            </div>
+
+
+            <div id="booksGrid" class="books-grid"></div>
+
+
+            <div id="noResults" class="no-results hidden">
+                <div>📚</div>
+                <h3>No books found</h3>
+                <p>Try another search or category.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="about" id="about">
+
+        <div class="container about-content">
+
+            <div>
+                <span class="section-label">ABOUT BOOKLY</span>
+                <h2>A place for curious minds.</h2>
+            </div>
+
+            <p>
+                Bookly is a modern online bookstore created for readers,
+                developers, students and everyone who loves discovering
+                new ideas through books.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- CART -->
+
+<div id="cartOverlay" class="overlay hidden">
+
+    <div class="cart-panel">
+
+        <div class="cart-header">
+            <div>
+                <span class="section-label">YOUR CART</span>
+                <h2>Shopping cart</h2>
+            </div>
+
+            <button onclick="closeCart()" class="close-button">
+                ×
+            </button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cartTotal">0 ₸</strong>
+            </div>
+
+            <button class="checkout-button" onclick="checkout()">
+                Checkout →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

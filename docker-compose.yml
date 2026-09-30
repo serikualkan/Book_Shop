@@ -1,0 +1,43 @@
+services:
+
+  backend:
+    build: .
+    container_name: book
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/book
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_DB: book
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  flyway_postgres:
+    image: postgres:16
+    container_name: flyway_postgres
+    environment:
+      POSTGRES_DB: test-books
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+
+
+  flyway:
+    image: flyway/flyway:10
+    container_name: flyway
+    command: -url=jdbc:postgresql://flyway_postgres:5432/test-books -user=postgres -password=postgres -locations=filesystem:/flyway/sql migrate
+    depends_on:
+      - flyway_postgres
